@@ -166,19 +166,22 @@ function loadBundlesSync(lang, langBundles) {
   });
 }
 
+// Since Safari doesn't allow localStorage setter/getter functions in incognito mode
+// we need to conditionally check that localStorage is available for setCache and getCache
+// https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API#Private_Browsing_Incognito_modes
 function setCache(lang, bundles) {
-  if (store) {
+  try {
     store.setItem(`${ storePrefix }.${ lang }`, JSON.stringify(bundles || {}));
-  } else {
+  } catch(e) {
     CACHE[lang] = bundles;
   }
 }
 
 function getCache(lang) {
-  if (store) {
+  try {
     const item = store.getItem(`${ storePrefix }.${ lang }`);
     return JSON.parse(item || '{}');
-  } else {
+  } catch(e) {
     return CACHE[lang];
   }
 }
