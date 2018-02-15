@@ -17,11 +17,13 @@
   },
   "author": "Bret K. Ikehara <bret.k.ikehara@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "fbemitter": "^2.1.1",
-    "prop-types": "^15.6.0",
+  "peerDependencies": {
     "react": "^0.14.7 || ^15.0.0",
     "react-dom": "^0.14.7 || ^15.0.0"
+  },
+  "dependencies": {
+    "fbemitter": "^2.1.1",
+    "prop-types": "^15.6.0"
   },
   "optionalDependencies": {
     "whatwg-fetch": "^1.0.0"
@@ -55,6 +57,8 @@
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.2",
     "ngrok": "^2.2.3",
+    "react": "^0.14.7 || ^15.0.0",
+    "react-dom": "^0.14.7 || ^15.0.0",
     "wdio-jasmine-framework": "^0.2.6",
     "wdio-phantomjs-service": "^0.1.0",
     "wdio-sauce-service": "^0.2.5",
