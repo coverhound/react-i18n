@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import i18n from '../src/index';
@@ -11,14 +10,14 @@ const LANGS = [
   {
     label: 'langauges.fr-FR',
     value: 'fr-FR',
-  }
+  },
 ];
 
 i18n.setConfig({
   url: './lang',
-  asyncLoadError: function (err, obj) {
-    console.error(err, obj);
-  }
+  asyncLoadError: (err, obj) => {
+    console.error(err, obj); // eslint-disable-line
+  },
 });
 
 const LANGUAGES_BUNDLE = {
@@ -28,21 +27,21 @@ const LANGUAGES_BUNDLE = {
 
 i18n.loadSync({
   'en-US': {
-    'langauges': LANGUAGES_BUNDLE,
-    'common': {
-      'header': '{ project } examples',
-      'helloWorld': 'Hello, {name}!',
-      'clicked': 'Click {count}',
-      'myLabel': "My Label",
+    langauges: LANGUAGES_BUNDLE,
+    common: {
+      header: '{ project } examples',
+      helloWorld: 'Hello, {name}!',
+      clicked: 'Click {count}',
+      myLabel: 'My Label',
     },
   },
   'fr-FR': {
-    'langauges': LANGUAGES_BUNDLE,
-    'common': {
-      'header': '{ project } exemples',
-      'helloWorld': 'Bonjour, {name}!',
-      'clicked': 'Cliquez {count}',
-      'myLabel': "My Label",
+    langauges: LANGUAGES_BUNDLE,
+    common: {
+      header: '{ project } exemples',
+      helloWorld: 'Bonjour, {name}!',
+      clicked: 'Cliquez {count}',
+      myLabel: 'My Label',
     },
   },
 });
@@ -63,66 +62,65 @@ let CONSTANT_EXAMPLE;
     updateLang();
   });
 */
-const destroy = i18n.onUpdate('common', function () {
-  CONSTANT_EXAMPLE = i18n.renderI18n('common.header', {
-    project: 'i18n',
-  });
-});
 
 // Create Example Component
-const Examples = React.createClass({
-  getInitialState: function() {
-    return {
-      count: 0,
-    }
-  },
-  clickHandler: function () {
+class Example extends Component {
+  state = {
+    count: 0,
+  };
+
+  clickHandler = () => {
     this.setState({
       count: this.state.count + 1,
     });
-  },
-  changeLang: function ({ target }) {
+  }
+
+  changeLang = ({ target }) => {
     i18n.setConfig({
       lang: target.value,
     });
-  },
-  render: function() {
+  }
+
+  render() {
     return (
       <div>
-        <select onChange={ this.changeLang }>
-          { LANGS.map((lang, index) => {
-            return (
-              <i18n.option
-                key={ index }
-                value={ lang.value }
-                data-i18n={ lang.label } />
-            );
-          }) }
+        <select onChange={this.changeLang}>
+          {LANGS.map((lang) => (
+            <i18n.option
+              key={lang.value}
+              value={lang.value}
+              data-i18n={lang.label}
+            />
+          )) }
         </select>
 
-        <h1>{ CONSTANT_EXAMPLE }</h1>
+        <h1>{CONSTANT_EXAMPLE}</h1>
 
         <i18n.p
           id="helloWorld"
           data-i18n="common.helloWorld"
           fallback="common bundle did not load."
-          options={{
-            name: 'John',
-          }} />
+          options={{ name: 'John',
+          }}
+        />
+
         <i18n.p
           id="nonexistentMessage"
           data-i18n="common.nonexistentMessage"
-          fallback="message does not exist" />
+          fallback="message does not exist"
+        />
 
         <i18n.p
           id="welcome"
           data-i18n="landing.welcome"
-          fallback="async load did not work" />
+          fallback="async load did not work"
+        />
 
         <i18n.p
           id="email"
           data-i18n="contact.email"
-          fallback="bundle does not exist" />
+          fallback="bundle does not exist"
+        />
 
         <i18n.a
           id="a_clicked"
@@ -130,7 +128,8 @@ const Examples = React.createClass({
           options={{
             count: this.state.count,
           }}
-          onClick={ this.clickHandler } />
+          onClick={this.clickHandler}
+        />
 
         <i18n.button
           id="btn_clicked"
@@ -138,21 +137,24 @@ const Examples = React.createClass({
           options={{
             count: this.state.count,
           }}
-          onClick={ this.clickHandler } />
+          onClick={this.clickHandler}
+        />
 
         <div>
           <i18n.label
             id="myLabel"
             data-i18n="common.myLabel"
-            for="myLabel" />
+            htmlFor="myLabel"
+          />
 
           <input type="text" id="myLabel" />
         </div>
       </div>
     );
   }
-});
+}
 
-ReactDOM.render(<Examples></Examples>, document.querySelector('#examples'));
+
+ReactDOM.render(<Example />, document.querySelector('#examples'));
 
 export default i18n;
