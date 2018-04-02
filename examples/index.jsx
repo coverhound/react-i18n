@@ -4,11 +4,11 @@ import i18n from '../src/index';
 
 const LANGS = [
   {
-    label: 'langauges.en-US',
+    label: 'languages.en-US',
     value: 'en-US',
   },
   {
-    label: 'langauges.fr-FR',
+    label: 'languages.fr-FR',
     value: 'fr-FR',
   },
 ];
@@ -27,7 +27,7 @@ const LANGUAGES_BUNDLE = {
 
 i18n.loadSync({
   'en-US': {
-    langauges: LANGUAGES_BUNDLE,
+    languages: LANGUAGES_BUNDLE,
     common: {
       header: '{ project } examples',
       helloWorld: 'Hello, {name}!',
@@ -36,7 +36,7 @@ i18n.loadSync({
     },
   },
   'fr-FR': {
-    langauges: LANGUAGES_BUNDLE,
+    languages: LANGUAGES_BUNDLE,
     common: {
       header: '{ project } exemples',
       helloWorld: 'Bonjour, {name}!',
@@ -100,8 +100,7 @@ class Example extends Component {
           id="helloWorld"
           data-i18n="common.helloWorld"
           fallback="common bundle did not load."
-          options={{ name: 'John',
-          }}
+          options={{ name: 'John' }}
         />
 
         <i18n.p
@@ -125,18 +124,14 @@ class Example extends Component {
         <i18n.a
           id="a_clicked"
           data-i18n="common.clicked"
-          options={{
-            count: this.state.count,
-          }}
+          options={{ count: this.state.count }}
           onClick={this.clickHandler}
         />
 
         <i18n.button
           id="btn_clicked"
           data-i18n="common.clicked"
-          options={{
-            count: this.state.count,
-          }}
+          options={{ count: this.state.count }}
           onClick={this.clickHandler}
         />
 
