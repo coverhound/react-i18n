@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import CreateReactClass from 'create-react-class';
 
 import lib from './lib';
 
@@ -112,7 +113,7 @@ const VALID_TAGS = [
   'label', 'option',
 ];
 VALID_TAGS.forEach((tagName) => {
-  i18n[tagName] = React.createClass(Object.assign({
+  i18n[tagName] = CreateReactClass(Object.assign({
     getInitialState: getInitialState(tagName),
     propTypes: PROP_TYPES[tagName] || DEFAULT_PROP_TYPES,
   }, DEFAULT_ELEM));
