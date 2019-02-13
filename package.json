@@ -1,6 +1,6 @@
 {
   "name": "@coverhound/react-i18n",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "scripts": {
